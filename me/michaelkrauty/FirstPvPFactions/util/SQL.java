@@ -132,7 +132,6 @@ public class SQL extends Main{
 	}
 	
 	public synchronized static boolean createFaction(String name, String owner){
-		
 		try{
 			if(!factionDataContainsFaction(name)){
 				openConnection();
