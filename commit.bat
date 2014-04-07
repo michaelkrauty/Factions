@@ -1,6 +1,8 @@
 cd C:\Users\Michael\Desktop\test_server
 rmdir /Q /S git\FirstPvPFactions\src
+rmdir /Q /S git\FirstPvPFactions\target
 mkdir git\FirstPvPFactions\src
+mkdir git\FirstPvPFactions\target
 copy plugins\FirstPvPFactions.jar git\FirstPvPFactions\src
 cd git\FirstPvPFactions\src
 jar xf FirstPvPFactions.jar
