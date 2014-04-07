@@ -1,6 +1,5 @@
 package me.michaelkrauty.FirstPvPFactions;
 
-import java.util.ArrayList;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -18,14 +17,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-@SuppressWarnings("unused")
 public class Main extends JavaPlugin implements Listener{
 
 	public static Main main;
-	
-	
-	//54
-	
 	
 	public String db_host = getConfig().getString("database.host");
 	public String db_port = getConfig().getString("database.port");
@@ -92,14 +86,17 @@ public class Main extends JavaPlugin implements Listener{
 			
 			if(args[0].equalsIgnoreCase("join")){
 				Join.join(player, args);
+				return true;
 			}
 			
 			if(args[0].equalsIgnoreCase("kick")){
 				Kick.kick(player, args);
+				return true;
 			}
 			
 			if(args[0].equalsIgnoreCase("leave")){
 				Leave.leave(player, args);
+				return true;
 			}
 			
 			if(args[0].equalsIgnoreCase("members")){
@@ -109,6 +106,7 @@ public class Main extends JavaPlugin implements Listener{
 			
 			if(args[0].equalsIgnoreCase("neutral")){
 				Neutral.neutral(player, args);
+				return true;
 			}
 			
 			if(args[0].equalsIgnoreCase("power")){
@@ -136,8 +134,5 @@ public class Main extends JavaPlugin implements Listener{
 	@EventHandler
 	public void onPlayerMove(PlayerMoveEvent event){
 		Player player = event.getPlayer();
-		String playerName = player.getName();
-		UUID UUID = player.getUniqueId();
-		Chunk chunk = player.getLocation().getChunk();
 	}
 }
