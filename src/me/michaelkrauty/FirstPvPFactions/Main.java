@@ -23,6 +23,10 @@ public class Main extends JavaPlugin implements Listener{
 
 	public static Main main;
 	
+	
+	//54
+	
+	
 	public String db_host = getConfig().getString("database.host");
 	public String db_port = getConfig().getString("database.port");
 	public String db_database = getConfig().getString("database.database");

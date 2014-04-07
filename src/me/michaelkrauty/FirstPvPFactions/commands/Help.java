@@ -1,6 +1,7 @@
 package me.michaelkrauty.FirstPvPFactions.commands;
 
 import me.michaelkrauty.FirstPvPFactions.Main;
+import me.michaelkrauty.FirstPvPFactions.util.Format;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -9,8 +10,13 @@ public class Help extends Main{
 	public static void help(Player player, String args[]){
 		if(args.length == 2){
 			if(args[1].equalsIgnoreCase("1")){
-				player.sendMessage("page1");
-				player.sendMessage("test");
+				player.sendMessage(Format.doIt("&7/--------------------&aFactions Help&7--------------------\\"));
+				player.sendMessage(Format.doIt("&a/f help &8| &bShow this help menu"));
+				player.sendMessage(Format.doIt("&a/f create <name> &8| &bCreate the faction <name>"));
+				player.sendMessage(Format.doIt("&a/f invite <player> &8| &bInvite <player> to your faction"));
+				player.sendMessage(Format.doIt("&a/f kick <player> &8| &bKick <player> from your faction"));
+				player.sendMessage(Format.doIt("&a/f who <faction | player> &8| &bSee who is in <faction>"));
+				player.sendMessage(Format.doIt("└&bor see what faction <player> is in"));
 				return;
 			}
 			if(args[1].equalsIgnoreCase("2")){
