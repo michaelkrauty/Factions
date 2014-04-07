@@ -10,6 +10,7 @@ public class Help extends Main{
 		if(args.length == 2){
 			if(args[1].equalsIgnoreCase("1")){
 				player.sendMessage("page1");
+				player.sendMessage("test");
 				return;
 			}
 			if(args[1].equalsIgnoreCase("2")){
