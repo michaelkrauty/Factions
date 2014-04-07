@@ -1,0 +1,7 @@
+name: FirstPvPFactions
+version: 1.0
+author: michaelkrauty
+main: me.michaelkrauty.FirstPvPFactions.Main
+commands:
+  factions:
+    aliases: [factions, f]
