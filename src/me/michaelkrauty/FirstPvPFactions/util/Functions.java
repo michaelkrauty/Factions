@@ -16,37 +16,32 @@ public class Functions extends Main{
 	}
 	
 	//get
-	public static ArrayList<String> getFactionMembers(UUID FactionUUID){
+	public static ArrayList<String> getFactionMembers(String FactionName){
 		ArrayList<String> members = new ArrayList<String>();
 		return members;
 	}
 	
-	public static String getFactionOwner(String FactionUUID){
+	public static String getFactionOwner(String FactionName){
 		String owner = null;
 		return owner;
 	}
 	
-	public static ArrayList<ArrayList<Integer>> getFactionLand(UUID FactionUUID){
+	public static ArrayList<ArrayList<Integer>> getFactionLand(String FactionName){
 		ArrayList<ArrayList<Integer>> land = new ArrayList<ArrayList<Integer>>();
 		return land;
 	}
 	
-	public static String getFactionName(UUID FactionUUID){
-		String name = null;
-		return name;
-	}
-	
-	public static String getFactionDescription(UUID FactionUUID){
+	public static String getFactionDescription(String FactionName){
 		String description = null;
 		return description;
 	}
 	
-	public static ArrayList<String> getFactionAllies(UUID FactionUUID){
+	public static ArrayList<String> getFactionAllies(String FactionName){
 		ArrayList<String> allies = new ArrayList<String>();
 		return allies;
 	}
 	
-	public static ArrayList<String> getFactionEnemies(UUID FactionUUID){
+	public static ArrayList<String> getFactionEnemies(String FactionName){
 		ArrayList<String> enemies = new ArrayList<String>();
 		return enemies;
 	}

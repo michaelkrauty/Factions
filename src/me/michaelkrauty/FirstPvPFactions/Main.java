@@ -40,16 +40,19 @@ public class Main extends JavaPlugin implements Listener{
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String args[]){
 		if(commandLabel.equalsIgnoreCase("f") || commandLabel.equalsIgnoreCase("factions")){
+			//verify sender is a player
 			if(!(sender instanceof Player)){
 				log.info("You're a console. Bad console.");
 				return true;
 			}
 			
+			//player stuff
 			Player player = (Player) sender;
 			String playerName = player.getName();
 			String playerUUID = player.getUniqueId().toString();
 			
 			
+			//no args
 			if(args.length == 0){
 				sender.sendMessage(ChatColor.GRAY + "Unknown command! Use /f help for help.");
 				return true;
@@ -58,18 +61,13 @@ public class Main extends JavaPlugin implements Listener{
 			
 			
 			
+			//commands
+			if(args[0].equalsIgnoreCase("ally")){
+				Ally.ally(player, args);
+				return true;
+			}
 			if(args[0].equalsIgnoreCase("create")){
 				Create.create(player, args);
-				return true;
-			}
-			
-			if(args[0].equalsIgnoreCase("power")){
-				Power.power(player, args);
-				return true;
-			}
-			
-			if(args[0].equalsIgnoreCase("help")){
-				Help.help(player, args);
 				return true;
 			}
 			
@@ -78,13 +76,8 @@ public class Main extends JavaPlugin implements Listener{
 				return true;
 			}
 			
-			if(args[0].equalsIgnoreCase("ally")){
-				Ally.ally(player, args);
-				return true;
-			}
-			
-			if(args[0].equalsIgnoreCase("members")){
-				Members.members(player, args);
+			if(args[0].equalsIgnoreCase("help")){
+				Help.help(player, args);
 				return true;
 			}
 			
@@ -93,8 +86,34 @@ public class Main extends JavaPlugin implements Listener{
 				return true;
 			}
 			
+			if(args[0].equalsIgnoreCase("join")){
+				Join.join(player, args);
+			}
 			
-
+			if(args[0].equalsIgnoreCase("kick")){
+				Kick.kick(player, args);
+			}
+			
+			if(args[0].equalsIgnoreCase("leave")){
+				Leave.leave(player, args);
+			}
+			
+			if(args[0].equalsIgnoreCase("members")){
+				Members.members(player, args);
+				return true;
+			}
+			
+			if(args[0].equalsIgnoreCase("neutral")){
+				Neutral.neutral(player, args);
+			}
+			
+			if(args[0].equalsIgnoreCase("power")){
+				Power.power(player, args);
+				return true;
+			}
+			
+			
+			//bad command
 			sender.sendMessage(ChatColor.GRAY + "Unknown command! Use /f help for help.");
 			return true;
 		}

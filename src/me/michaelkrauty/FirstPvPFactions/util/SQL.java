@@ -58,7 +58,7 @@ public class SQL extends Main{
 		}catch(Exception e){
 			try{
 				openConnection();
-				PreparedStatement sql = connection.prepareStatement("CREATE TABLE `Factions_Factions`(FactionUUID varchar(255) KEY, FactionName varchar(255), FactionDescription varchar(255), FactionOwner varchar(255), FactionMembers varchar(255), FactionAllies varchar(255), FactionEnemies varchar(255), FactionLand varchar(255));");
+				PreparedStatement sql = connection.prepareStatement("CREATE TABLE `Factions_Factions`(FactionName varchar(255) KEY, FactionDescription varchar(255), FactionOwner varchar(255), FactionMembers varchar(255), FactionAllies varchar(255), FactionEnemies varchar(255), FactionLand varchar(255));");
 				sql.executeUpdate();
 				sql.close();
 				closeConnection();
@@ -104,6 +104,7 @@ public class SQL extends Main{
 		}
 	}
 	
+	@Deprecated
 	public void set(String UUID, String item, String value){
 		try{
 			if(playerDataContainsPlayer(UUID)){
@@ -135,12 +136,11 @@ public class SQL extends Main{
 		try{
 			if(!factionDataContainsFaction(name)){
 				openConnection();
-				PreparedStatement sql = connection.prepareStatement("INSERT INTO `Factions_Factions` values(?,?,?,?,?,NULL,NULL,NULL);");
-				sql.setString(1, Functions.generateUUID());
-				sql.setString(2, name);
-				sql.setString(3, "Default faction description");
+				PreparedStatement sql = connection.prepareStatement("INSERT INTO `Factions_Factions` values(?,?,?,?,NULL,NULL,NULL);");
+				sql.setString(1, name);
+				sql.setString(2, "Default faction description");
+				sql.setString(3, owner);
 				sql.setString(4, owner);
-				sql.setString(5, owner);
 				sql.executeUpdate();
 				sql.close();
 				closeConnection();
@@ -175,6 +175,12 @@ public class SQL extends Main{
 			closeConnection();
 		}
 		return null;
+	}
+	
+	public synchronized static void enemyFaction(String name1, String name2){
+		if(factionDataContainsFaction(name2)){
+			//TODO: enemy faction
+		}
 	}
 	
 	public synchronized static void playerJoin(String UUID, String playerName){
