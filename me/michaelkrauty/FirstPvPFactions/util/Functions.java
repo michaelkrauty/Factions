@@ -8,6 +8,14 @@ import me.michaelkrauty.FirstPvPFactions.Main;
 public class Functions extends Main{
 	
 	//factions
+	
+	//create
+	public static boolean createFaction(String name){
+		
+		return true;
+	}
+	
+	//get
 	public static ArrayList<String> getFactionMembers(UUID FactionUUID){
 		ArrayList<String> members = new ArrayList<String>();
 		return members;
@@ -47,19 +55,19 @@ public class Functions extends Main{
 	//players
 	public static String getPlayerName(String UUID){
 		ArrayList<String> pinfo = SQL.getPlayer(UUID);
-		String result = pinfo.get(2);
+		String result = pinfo.get(1);
 		return result;
 	}
 	
 	public static String getPlayerFaction(String UUID){
 		ArrayList<String> pinfo = SQL.getPlayer(UUID);
-		String result = pinfo.get(3);
+		String result = pinfo.get(2);
 		return result;
 	}
 	
 	public static int getPlayerPower(String UUID){
 		ArrayList<String> pinfo = SQL.getPlayer(UUID);
-		String result = pinfo.get(4);
+		String result = pinfo.get(3);
 		int res = Integer.parseInt(result);
 		return res;
 	}

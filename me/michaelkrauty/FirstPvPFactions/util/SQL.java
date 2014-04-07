@@ -41,7 +41,7 @@ public class SQL extends Main{
 		}catch(Exception e){
 			try{
 				openConnection();
-				PreparedStatement sql = connection.prepareStatement("CREATE TABLE `Factions_Players`(ID int(255) KEY AUTO_INCREMENT, PlayerUUID varchar(255), PlayerName varchar(255), PlayerFaction varchar(255), PlayerPower varchar(255));");
+				PreparedStatement sql = connection.prepareStatement("CREATE TABLE `Factions_Players`(PlayerUUID varchar(255) KEY, PlayerName varchar(255), PlayerFaction varchar(255), PlayerPower varchar(255));");
 				sql.executeUpdate();
 				sql.close();
 				closeConnection();
@@ -58,7 +58,7 @@ public class SQL extends Main{
 		}catch(Exception e){
 			try{
 				openConnection();
-				PreparedStatement sql = connection.prepareStatement("CREATE TABLE `Factions_Factions`(ID int(255) KEY AUTO_INCREMENT, FactionUUID varchar(255), FactionName varchar(255), FactionDescription varchar(255), FactionOwner varchar(255), FactionMembers varchar(255), FactionAllies varchar(255), FactionEnemies varchar(255), FactionLand varchar(255));");
+				PreparedStatement sql = connection.prepareStatement("CREATE TABLE `Factions_Factions`(FactionUUID varchar(255) KEY, FactionName varchar(255), FactionDescription varchar(255), FactionOwner varchar(255), FactionMembers varchar(255), FactionAllies varchar(255), FactionEnemies varchar(255), FactionLand varchar(255));");
 				sql.executeUpdate();
 				sql.close();
 				closeConnection();
@@ -79,6 +79,25 @@ public class SQL extends Main{
 			closeConnection();
 			
 			return containsPlayer;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	private synchronized static boolean factionDataContainsFaction(String name){
+		openConnection();
+		try{
+			PreparedStatement sql = connection.prepareStatement("SELECT * FROM `Factions_Factions` WHERE FactionName=?;");
+			sql.setString(1, name);
+			ResultSet resultSet = sql.executeQuery();
+			boolean containsFaction = resultSet.next();
+			
+			sql.close();
+			resultSet.close();
+			closeConnection();
+			
+			return containsFaction;
 		}catch(Exception e){
 			e.printStackTrace();
 			return false;
@@ -112,6 +131,28 @@ public class SQL extends Main{
 		}
 	}
 	
+	public synchronized static boolean createFaction(String name, String owner){
+		
+		try{
+			if(!factionDataContainsFaction(name)){
+				openConnection();
+				PreparedStatement sql = connection.prepareStatement("INSERT INTO `Factions_Factions` values(?,?,?,?,?,NULL,NULL,NULL);");
+				sql.setString(1, Functions.generateUUID());
+				sql.setString(2, name);
+				sql.setString(3, "Default faction description");
+				sql.setString(4, owner);
+				sql.setString(5, owner);
+				sql.executeUpdate();
+				sql.close();
+				closeConnection();
+				return true;
+			}
+			return false;
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
 	public synchronized static ArrayList<String> getPlayer(String UUID){
 		try{
 			if(playerDataContainsPlayer(UUID)){
@@ -121,7 +162,6 @@ public class SQL extends Main{
 				ResultSet result = sql.executeQuery();
 				result.next();
 				ArrayList<String> pinfo = new ArrayList<String>();
-				pinfo.add(result.getString("ID"));
 				pinfo.add(result.getString("PlayerUUID"));
 				pinfo.add(result.getString("PlayerName"));
 				pinfo.add(result.getString("PlayerFaction"));
@@ -142,7 +182,7 @@ public class SQL extends Main{
 		if(!playerDataContainsPlayer(UUID)){
 			try{
 			openConnection();
-			PreparedStatement sql = connection.prepareStatement("INSERT INTO `Factions_Players` values(0,?,?,NULL,0);");
+			PreparedStatement sql = connection.prepareStatement("INSERT INTO `Factions_Players` values(?,?,NULL,0);");
 			sql.setString(1, UUID);
 			sql.setString(2, playerName);
 			sql.execute();

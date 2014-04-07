@@ -50,23 +50,51 @@ public class Main extends JavaPlugin implements Listener{
 			String playerUUID = player.getUniqueId().toString();
 			
 			
+			if(args.length == 0){
+				sender.sendMessage(ChatColor.GRAY + "Unknown command! Use /f help for help.");
+				return true;
+			}
+			
+			
 			
 			
 			if(args[0].equalsIgnoreCase("create")){
 				Create.create(player, args);
 				return true;
 			}
+			
 			if(args[0].equalsIgnoreCase("power")){
 				Power.power(player, args);
 				return true;
 			}
+			
 			if(args[0].equalsIgnoreCase("help")){
 				Help.help(player, args);
 				return true;
 			}
 			
+			if(args[0].equalsIgnoreCase("enemy")){
+				Enemy.enemy(player, args);
+				return true;
+			}
+			
+			if(args[0].equalsIgnoreCase("ally")){
+				Ally.ally(player, args);
+				return true;
+			}
+			
+			if(args[0].equalsIgnoreCase("members")){
+				Members.members(player, args);
+				return true;
+			}
+			
+			if(args[0].equalsIgnoreCase("invite")){
+				Invite.invite(player, args);
+				return true;
+			}
 			
 			
+
 			sender.sendMessage(ChatColor.GRAY + "Unknown command! Use /f help for help.");
 			return true;
 		}

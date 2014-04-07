@@ -2,9 +2,9 @@ package me.michaelkrauty.FirstPvPFactions.commands;
 
 import org.bukkit.entity.Player;
 
-public class Enemy {
+public class Members {
 
-	public static void enemy(Player player, String[] args){
+	public static void members(Player player, String[] args) {
 		// TODO Auto-generated method stub
 		
 	}
