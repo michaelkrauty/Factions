@@ -15,6 +15,7 @@ public class Help extends Main{
 			}
 			if(args[1].equalsIgnoreCase("2")){
 				player.sendMessage("page2");
+				player.sendMessage("test2");
 				return;
 			}
 			if(args[1].equalsIgnoreCase("3")){
