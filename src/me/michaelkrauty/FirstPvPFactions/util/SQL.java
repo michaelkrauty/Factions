@@ -58,7 +58,7 @@ public class SQL extends Main{
 		}catch(Exception e){
 			try{
 				openConnection();
-				PreparedStatement sql = connection.prepareStatement("CREATE TABLE `Factions_Factions`(FactionName varchar(255) KEY, FactionDescription varchar(255), FactionOwner varchar(255), FactionMembers varchar(255), FactionAllies varchar(255), FactionEnemies varchar(255), FactionLand varchar(255));");
+				PreparedStatement sql = connection.prepareStatement("CREATE TABLE `Factions_Factions`(FactionName varchar(255) KEY, FactionDescription varchar(255), FactionOwner varchar(255), FactionMembers varchar(255), FactionAllies varchar(255), FactionEnemies varchar(255), FactionLand varchar(255), FactionPower varchar(255));");
 				sql.executeUpdate();
 				sql.close();
 				closeConnection();
@@ -139,7 +139,7 @@ public class SQL extends Main{
 		try{
 			if(!factionDataContainsFaction(name)){
 				openConnection();
-				PreparedStatement sql = connection.prepareStatement("INSERT INTO `Factions_Factions` values(?,?,?,?,NULL,NULL,NULL);");
+				PreparedStatement sql = connection.prepareStatement("INSERT INTO `Factions_Factions` values(?,?,?,?,NULL,NULL,NULL,0);");
 				sql.setString(1, name);
 				sql.setString(2, "Default faction description");
 				sql.setString(3, owner);
@@ -198,6 +198,7 @@ public class SQL extends Main{
 				finfo.add(result.getString("FactionAllies"));
 				finfo.add(result.getString("FactionEnemies"));
 				finfo.add(result.getString("FactionLand"));
+				finfo.add(result.getString("FactionPower"));
 				return finfo;
 			}else{
 				return null;
