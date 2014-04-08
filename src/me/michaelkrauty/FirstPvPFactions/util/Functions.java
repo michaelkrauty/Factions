@@ -1,12 +1,11 @@
 package me.michaelkrauty.FirstPvPFactions.util;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 import me.michaelkrauty.FirstPvPFactions.Main;
 
 public class Functions extends Main{
-	
+	/**
 	//factions
 	
 	//create
@@ -66,7 +65,7 @@ public class Functions extends Main{
 		String result = pinfo.get(2);
 		return result;
 	}
-	
+	*/
 	//get player power
 	public static int getPlayerPower(String UUID){
 		ArrayList<String> pinfo = SQL.getPlayer(UUID);
@@ -75,10 +74,11 @@ public class Functions extends Main{
 		return res;
 	}
 	
-	
+	/**
 	//util
 	//generate UUID
 	public static String generateUUID(){
 		return UUID.randomUUID().toString();
 	}
+	*/
 }

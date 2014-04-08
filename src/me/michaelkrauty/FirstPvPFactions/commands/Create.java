@@ -11,11 +11,12 @@ public class Create extends Main{
 		if(args.length < 2){
 			player.sendMessage("Incorrect Usage!");
 		}
-		if(SQL.createFaction(args[1], player.getUniqueId().toString())){
+		String result = SQL.createFaction(args[1], player.getUniqueId().toString());
+		if(result.equals("SUCCESS")){
 			player.sendMessage("Faction created!");
 			return;
 		}else{
-			player.sendMessage("error.");
+			player.sendMessage(result);
 			return;
 		}
 	}

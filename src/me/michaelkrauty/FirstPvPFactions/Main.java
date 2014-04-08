@@ -1,5 +1,6 @@
 package me.michaelkrauty.FirstPvPFactions;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -113,6 +114,14 @@ public class Main extends JavaPlugin implements Listener{
 			
 			if(args[0].equalsIgnoreCase("power")){
 				Power.power(player, args);
+				return true;
+			}
+			
+			if(args[0].equalsIgnoreCase("test")){
+				ArrayList<String> test = SQL.getFactionMembers(args[1]);
+				for(int i = 0; i < test.size(); i++){
+					player.sendMessage(test.get(i));
+				}
 				return true;
 			}
 			

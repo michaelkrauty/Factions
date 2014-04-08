@@ -8,11 +8,11 @@ public class Join {
 
 	public static void join(Player player, String[] args) {
 		if(args.length == 2){
-			boolean result = SQL.addPlayerToFaction(player.getUniqueId().toString(), args[1]);
-			if(result){
+			String result = SQL.addPlayerToFaction(player.getUniqueId().toString(), args[1]);
+			if(result.equals("SUCCESS")){
 				player.sendMessage("success");
 			}else{
-				player.sendMessage("failure");
+				player.sendMessage(result);
 			}
 		}
 	}

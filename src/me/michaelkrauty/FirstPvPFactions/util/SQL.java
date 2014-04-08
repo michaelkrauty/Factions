@@ -1,19 +1,16 @@
 package me.michaelkrauty.FirstPvPFactions.util;
 
-import java.io.Serializable;
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.logging.Level;
 
 import me.michaelkrauty.FirstPvPFactions.Main;
 
-public class SQL extends Main implements Serializable{
+public class SQL extends Main{
 	
 	private static Connection connection;
 	
@@ -139,7 +136,7 @@ public class SQL extends Main implements Serializable{
 	}
 	
 	//createFaction
-	public synchronized static boolean createFaction(String name, String ownerUUID){
+	public synchronized static String createFaction(String name, String ownerUUID){
 		try{
 			if(!factionDataContainsFaction(name)){
 				openConnection();
@@ -151,11 +148,12 @@ public class SQL extends Main implements Serializable{
 				sql.executeUpdate();
 				sql.close();
 				closeConnection();
-				return true;
+				return "SUCCESS";
 			}
-			return false;
+			return "ERROR:FACTION_ALREADY_EXISTS";
 		}catch(Exception e){
-			return false;
+			e.printStackTrace();
+			return "ERROR:SQL";
 		}
 	}
 	
@@ -179,10 +177,10 @@ public class SQL extends Main implements Serializable{
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+			return null;
 		}finally{
 			closeConnection();
 		}
-		return null;
 	}
 	
 	//getFaction
@@ -209,10 +207,10 @@ public class SQL extends Main implements Serializable{
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+			return null;
 		}finally{
 			closeConnection();
 		}
-		return null;
 	}
 	
 	//getFactionMembers
@@ -231,10 +229,10 @@ public class SQL extends Main implements Serializable{
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+			return null;
 		}finally{
 			closeConnection();
 		}
-		return null;
 	}
 	
 	//getFactionAllies
@@ -247,7 +245,7 @@ public class SQL extends Main implements Serializable{
 	
 	
 	//addPlayerToFaction
-	public synchronized static boolean addPlayerToFaction(String playerUUID, String factionName){
+	public synchronized static String addPlayerToFaction(String playerUUID, String factionName){
 		try{
 			if(factionDataContainsFaction(factionName)){
 				openConnection();
@@ -255,34 +253,35 @@ public class SQL extends Main implements Serializable{
 				sql.setString(1, factionName);
 				ResultSet result = sql.executeQuery();
 				result.next();
-				ArrayList<String> finfo = new ArrayList<String>(Arrays.asList(result.getString("FactionMembers").split(", ")));
+				String members = result.getString("FactionMembers");
 				sql.close();
 				closeConnection();
-				if(!finfo.contains(factionName)){
+				if(!members.contains(playerUUID)){
 					//if player is invited {here}
-					ArrayList<String> factionMembers = getFactionMembers(factionName);
-					if(!factionMembers.contains(playerUUID)){
-						factionMembers.add(playerUUID);
-						openConnection();
-						PreparedStatement sql2 = connection.prepareStatement("UPDATE `Factions_Factions` SET FactionMembers=? WHERE FactionName=?;");
-						sql2.setString(1, factionMembers.toString());
-						sql2.setString(2, factionName);
-						sql2.executeUpdate();
-						sql2.close();
-						return true;
-					}
-					return false;
+					String newstring = members + "," + playerUUID;
+					openConnection();
+					PreparedStatement sql2 = connection.prepareStatement("UPDATE `Factions_Factions` SET FactionMembers=? WHERE FactionName=?;");
+					sql2.setString(1, newstring);
+					sql2.setString(2, factionName);
+					sql2.executeUpdate();
+					sql2.close();
+					PreparedStatement sql3 = connection.prepareStatement("UPDATE `Factions_Players` SET PlayerFaction=? WHERE PlayerUUID=?;");
+					sql3.setString(1, factionName);
+					sql3.setString(2, playerUUID);
+					sql3.executeUpdate();
+					sql2.close();
+					return "SUCCESS";
 				}
-				return false;
+				return "ERROR:PLAYER_ALREADY_IN_FACTION";
 			}else{
-				return false;
+				return "ERROR:FACTION_DOES_NOT_EXIST";
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+			return "ERROR:SQL";
 		}finally{
 			closeConnection();
 		}
-		return false;
 	}
 	
 	

@@ -1,12 +1,14 @@
 package me.michaelkrauty.FirstPvPFactions.commands;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
+import me.michaelkrauty.FirstPvPFactions.Main;
 import me.michaelkrauty.FirstPvPFactions.util.SQL;
 
 import org.bukkit.entity.Player;
 
-public class Members {
+public class Members extends Main{
 
 	public static void members(Player player, String[] args) {
 		if(args.length == 2){
@@ -28,7 +30,7 @@ public class Members {
 				
 				ArrayList<String> members = SQL.getFactionMembers(args[1]);
 				for(int i = 0; i < members.size(); i++){
-					player.sendMessage(members.get(i));
+					player.sendMessage("" + main.getServer().getPlayer(UUID.fromString(members.get(i))).getName());
 				}
 				
 			}else{
