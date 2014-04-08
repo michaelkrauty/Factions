@@ -29,9 +29,15 @@ public class Members extends Main{
 				*/
 				
 				ArrayList<String> members = SQL.getFactionMembers(args[1]);
+				String out = "Members: ";
 				for(int i = 0; i < members.size(); i++){
-					player.sendMessage("" + main.getServer().getPlayer(UUID.fromString(members.get(i))).getName());
+					if(i == 0){
+						out = out + main.getServer().getPlayer(UUID.fromString(members.get(i))).getName();
+					}else{
+						out = out + ", " + main.getServer().getPlayer(UUID.fromString(members.get(i))).getName();
+					}
 				}
+				player.sendMessage(out);
 				
 			}else{
 				player.sendMessage("The faction " + args[1] + " doesn't exist!");
