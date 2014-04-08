@@ -9,11 +9,7 @@ public class Join {
 	public static void join(Player player, String[] args) {
 		if(args.length == 2){
 			String result = SQL.addPlayerToFaction(player.getUniqueId().toString(), args[1]);
-			if(result.equals("SUCCESS")){
-				player.sendMessage("success");
-			}else{
-				player.sendMessage(result);
-			}
+			player.sendMessage(result);
 		}
 	}
 
