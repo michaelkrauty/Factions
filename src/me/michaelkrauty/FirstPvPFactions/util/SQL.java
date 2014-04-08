@@ -1,15 +1,19 @@
 package me.michaelkrauty.FirstPvPFactions.util;
 
+import java.io.Serializable;
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.logging.Level;
 
 import me.michaelkrauty.FirstPvPFactions.Main;
 
-public class SQL extends Main{
+public class SQL extends Main implements Serializable{
 	
 	private static Connection connection;
 	
@@ -135,15 +139,15 @@ public class SQL extends Main{
 	}
 	
 	//createFaction
-	public synchronized static boolean createFaction(String name, String owner){
+	public synchronized static boolean createFaction(String name, String ownerUUID){
 		try{
 			if(!factionDataContainsFaction(name)){
 				openConnection();
 				PreparedStatement sql = connection.prepareStatement("INSERT INTO `Factions_Factions` values(?,?,?,?,NULL,NULL,NULL,0);");
 				sql.setString(1, name);
 				sql.setString(2, "Default faction description");
-				sql.setString(3, owner);
-				sql.setString(4, owner);
+				sql.setString(3, ownerUUID);
+				sql.setString(4, ownerUUID);
 				sql.executeUpdate();
 				sql.close();
 				closeConnection();
@@ -210,6 +214,80 @@ public class SQL extends Main{
 		}
 		return null;
 	}
+	
+	//getFactionMembers
+	public synchronized static ArrayList<String> getFactionMembers(String name){
+		try{
+			if(factionDataContainsFaction(name)){
+				openConnection();
+				PreparedStatement sql = connection.prepareStatement("SELECT FactionMembers FROM `Factions_Factions` WHERE FactionName=?;");
+				sql.setString(1, name);
+				ResultSet result = sql.executeQuery();
+				result.next();
+				ArrayList<String> finfo = new ArrayList<String>(Arrays.asList(result.getString("FactionMembers").split(",")));
+				return finfo;
+			}else{
+				return null;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			closeConnection();
+		}
+		return null;
+	}
+	
+	//getFactionAllies
+	
+	
+	//getFactionEnemies
+	
+	
+	//getFactionLand
+	
+	
+	//addPlayerToFaction
+	public synchronized static boolean addPlayerToFaction(String playerUUID, String factionName){
+		try{
+			if(factionDataContainsFaction(factionName)){
+				openConnection();
+				PreparedStatement sql = connection.prepareStatement("SELECT FactionMembers FROM `Factions_Factions` WHERE FactionName=?;");
+				sql.setString(1, factionName);
+				ResultSet result = sql.executeQuery();
+				result.next();
+				ArrayList<String> finfo = new ArrayList<String>(Arrays.asList(result.getString("FactionMembers").split(", ")));
+				sql.close();
+				closeConnection();
+				if(!finfo.contains(factionName)){
+					//if player is invited {here}
+					ArrayList<String> factionMembers = getFactionMembers(factionName);
+					if(!factionMembers.contains(playerUUID)){
+						factionMembers.add(playerUUID);
+						openConnection();
+						PreparedStatement sql2 = connection.prepareStatement("UPDATE `Factions_Factions` SET FactionMembers=? WHERE FactionName=?;");
+						sql2.setString(1, factionMembers.toString());
+						sql2.setString(2, factionName);
+						sql2.executeUpdate();
+						sql2.close();
+						return true;
+					}
+					return false;
+				}
+				return false;
+			}else{
+				return false;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			closeConnection();
+		}
+		return false;
+	}
+	
+	
+	//removePlayerFromFaction
+	
 	
 	//enemyFaction
 	public synchronized static void enemyFaction(String name1, String name2){

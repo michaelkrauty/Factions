@@ -11,7 +11,7 @@ public class Create extends Main{
 		if(args.length < 2){
 			player.sendMessage("Incorrect Usage!");
 		}
-		if(SQL.createFaction(args[1], player.getName())){
+		if(SQL.createFaction(args[1], player.getUniqueId().toString())){
 			player.sendMessage("Faction created!");
 			return;
 		}else{
