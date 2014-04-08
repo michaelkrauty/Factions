@@ -1,6 +1,5 @@
 package me.michaelkrauty.FirstPvPFactions;
 
-import java.util.ArrayList;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -13,6 +12,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -117,14 +119,6 @@ public class Main extends JavaPlugin implements Listener{
 				return true;
 			}
 			
-			if(args[0].equalsIgnoreCase("test")){
-				ArrayList<String> test = SQL.getFactionMembers(args[1]);
-				for(int i = 0; i < test.size(); i++){
-					player.sendMessage(test.get(i));
-				}
-				return true;
-			}
-			
 			
 			//bad command
 			sender.sendMessage(ChatColor.GRAY + "Unknown command! Use /f help for help.");
@@ -144,6 +138,21 @@ public class Main extends JavaPlugin implements Listener{
 	
 	@EventHandler
 	public void onPlayerMove(PlayerMoveEvent event){
-		
+		//check if player is on faction land
+	}
+	
+	@EventHandler
+	public void onPlayerInteract(PlayerInteractEvent event){
+		//check if player is interacting with faction land
+	}
+	
+	@EventHandler
+	public void onEntityExplode(EntityExplodeEvent event){
+		//prevent creeper explosions on faction land
+	}
+	
+	@EventHandler
+	public void onCreatureSpawn(CreatureSpawnEvent event){
+		//?
 	}
 }
