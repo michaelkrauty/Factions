@@ -1,10 +1,10 @@
-package me.michaelkrauty.FirstPvPFactions.commands;
+package me.michaelkrauty.Factions.commands;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
-import me.michaelkrauty.FirstPvPFactions.Main;
-import me.michaelkrauty.FirstPvPFactions.util.SQL;
+import me.michaelkrauty.Factions.Main;
+import me.michaelkrauty.Factions.util.SQL;
 
 import org.bukkit.entity.Player;
 

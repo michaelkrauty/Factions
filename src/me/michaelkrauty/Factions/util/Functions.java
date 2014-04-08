@@ -1,8 +1,8 @@
-package me.michaelkrauty.FirstPvPFactions.util;
+package me.michaelkrauty.Factions.util;
 
 import java.util.ArrayList;
 
-import me.michaelkrauty.FirstPvPFactions.Main;
+import me.michaelkrauty.Factions.Main;
 
 public class Functions extends Main{
 	/**

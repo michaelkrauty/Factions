@@ -1,7 +1,7 @@
-package me.michaelkrauty.FirstPvPFactions.commands;
+package me.michaelkrauty.Factions.commands;
 
-import me.michaelkrauty.FirstPvPFactions.Main;
-import me.michaelkrauty.FirstPvPFactions.util.Format;
+import me.michaelkrauty.Factions.Main;
+import me.michaelkrauty.Factions.util.Format;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

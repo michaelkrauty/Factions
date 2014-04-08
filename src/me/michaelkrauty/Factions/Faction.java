@@ -1,8 +1,10 @@
-package me.michaelkrauty.FirstPvPFactions;
+package me.michaelkrauty.Factions;
+
+import me.michaelkrauty.Factions.Main;
+import me.michaelkrauty.Factions.util.SQL;
 
 import java.util.ArrayList;
-
-import me.michaelkrauty.FirstPvPFactions.util.SQL;
+import java.util.UUID;
 
 @SuppressWarnings({"static-access"})
 public class Faction{
@@ -28,7 +30,9 @@ public class Faction{
 			this.land = result.get(6);
 			String powerStr = result.get(7);
 			this.power = Integer.parseInt(powerStr);
-		}catch(Exception e){this.name = null;}
+		}catch(Exception e){
+			
+		}
 	}
 	
 	//get
@@ -38,8 +42,11 @@ public class Faction{
 	public String getDesc(){
 		return this.description;
 	}
-	public String getOwner(){
+	public String getOwnerUUID(){
 		return this.owner;
+	}
+	public String getOwnerName(){
+		return Main.main.getServer().getPlayer(UUID.fromString(this.owner)).getName();
 	}
 	public String getMembers(){
 		return this.members;

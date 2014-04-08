@@ -1,4 +1,4 @@
-package me.michaelkrauty.FirstPvPFactions.commands;
+package me.michaelkrauty.Factions.commands;
 
 import org.bukkit.entity.Player;
 

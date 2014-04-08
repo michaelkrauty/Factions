@@ -1,6 +1,6 @@
-package me.michaelkrauty.FirstPvPFactions.commands;
+package me.michaelkrauty.Factions.commands;
 
-import me.michaelkrauty.FirstPvPFactions.util.SQL;
+import me.michaelkrauty.Factions.util.SQL;
 
 import org.bukkit.entity.Player;
 

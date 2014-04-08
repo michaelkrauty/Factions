@@ -1,10 +1,10 @@
-package me.michaelkrauty.FirstPvPFactions;
+package me.michaelkrauty.Factions;
 
 import java.util.UUID;
 import java.util.logging.Logger;
 
-import me.michaelkrauty.FirstPvPFactions.util.*;
-import me.michaelkrauty.FirstPvPFactions.commands.*;
+import me.michaelkrauty.Factions.commands.*;
+import me.michaelkrauty.Factions.util.*;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -17,11 +17,14 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin implements Listener{
 
 	public static Main main;
+	
+	public static Plugin plugin;
 	
 	public String db_host = getConfig().getString("database.host");
 	public String db_port = getConfig().getString("database.port");

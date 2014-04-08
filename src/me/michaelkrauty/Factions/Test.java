@@ -1,4 +1,4 @@
-package me.michaelkrauty.FirstPvPFactions;
+package me.michaelkrauty.Factions;
 
 import org.bukkit.entity.Player;
 
@@ -9,6 +9,8 @@ public class Test extends Main{
 			Faction faction = new Faction(args[1]);
 			if(faction.getName() != null){
 				player.sendMessage(Integer.toString(faction.getPower()));
+				player.sendMessage("OwnerUUID: " + faction.getOwnerUUID());
+				player.sendMessage("OwnerName: " + faction.getOwnerName());
 				player.sendMessage("Members: " + faction.getMembers());
 				player.sendMessage("Desc: " + faction.getDesc());
 			}else{

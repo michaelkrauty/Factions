@@ -1,9 +1,9 @@
-package me.michaelkrauty.FirstPvPFactions.commands;
+package me.michaelkrauty.Factions.commands;
 
 import org.bukkit.entity.Player;
 
-import me.michaelkrauty.FirstPvPFactions.Main;
-import me.michaelkrauty.FirstPvPFactions.util.SQL;
+import me.michaelkrauty.Factions.Main;
+import me.michaelkrauty.Factions.util.SQL;
 
 public class Create extends Main{
 	

@@ -1,16 +1,16 @@
 cd C:\Users\Michael\Desktop\test_server
-rmdir /Q /S git\FirstPvPFactions\src
-rmdir /Q /S git\FirstPvPFactions\target
-mkdir git\FirstPvPFactions\src
-mkdir git\FirstPvPFactions\target
-copy plugins\FirstPvPFactions.jar git\FirstPvPFactions\src
-cd git\FirstPvPFactions\src
-jar xf FirstPvPFactions.jar
+rmdir /Q /S git\Factions\src
+rmdir /Q /S git\Factions\target
+mkdir git\Factions\src
+mkdir git\Factions\target
+copy plugins\Factions.jar git\Factions\src
+cd git\Factions\src
+jar xf Factions.jar
 rmdir /Q /S META-INF
 del .project
 del .classpath
-move FirstPvPFactions.jar ../target
-cd me\michaelkrauty\FirstPvPFactions
+move Factions.jar ../target
+cd me\michaelkrauty\Factions
 del *.class
 del commands\*.class
 del util\*.class

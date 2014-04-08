@@ -1,6 +1,6 @@
-package me.michaelkrauty.FirstPvPFactions.util;
+package me.michaelkrauty.Factions.util;
 
-import me.michaelkrauty.FirstPvPFactions.Main;
+import me.michaelkrauty.Factions.Main;
 
 public class Format extends Main{
 	

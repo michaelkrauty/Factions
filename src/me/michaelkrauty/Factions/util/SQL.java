@@ -1,4 +1,4 @@
-package me.michaelkrauty.FirstPvPFactions.util;
+package me.michaelkrauty.Factions.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
 
-import me.michaelkrauty.FirstPvPFactions.Main;
+import me.michaelkrauty.Factions.Main;
 
 public class SQL extends Main{
 	
