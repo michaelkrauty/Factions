@@ -8,6 +8,10 @@ import me.michaelkrauty.FirstPvPFactions.util.Functions;
 public class Power extends Main{
 	
 	public static void power(Player player, String args[]){
-		player.sendMessage("You have " + Functions.getPlayerPower(player.getUniqueId().toString()) + " power.");
+		if(args.length == 2){
+			
+		}else{
+			player.sendMessage("You have " + Functions.getPlayerPower(player.getUniqueId().toString()) + " power.");
+		}
 	}
 }

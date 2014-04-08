@@ -7,7 +7,6 @@ import me.michaelkrauty.FirstPvPFactions.util.*;
 import me.michaelkrauty.FirstPvPFactions.commands.*;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Chunk;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -46,8 +45,11 @@ public class Main extends JavaPlugin implements Listener{
 			
 			//player stuff
 			Player player = (Player) sender;
-			String playerName = player.getName();
-			String playerUUID = player.getUniqueId().toString();
+			
+			/* unused
+			 * String playerName = player.getName();
+			 * String playerUUID = player.getUniqueId().toString();
+			*/
 			
 			
 			//no args
@@ -133,6 +135,6 @@ public class Main extends JavaPlugin implements Listener{
 	
 	@EventHandler
 	public void onPlayerMove(PlayerMoveEvent event){
-		Player player = event.getPlayer();
+		
 	}
 }

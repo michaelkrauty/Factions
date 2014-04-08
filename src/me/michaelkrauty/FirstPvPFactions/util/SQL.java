@@ -66,6 +66,7 @@ public class SQL extends Main{
 		}
 	}
 	
+	//playerDataContainsPlayer
 	private synchronized static boolean playerDataContainsPlayer(String UUID){
 		openConnection();
 		try{
@@ -85,6 +86,7 @@ public class SQL extends Main{
 		}
 	}
 	
+	//factionDataContainsFaction
 	private synchronized static boolean factionDataContainsFaction(String name){
 		openConnection();
 		try{
@@ -132,6 +134,7 @@ public class SQL extends Main{
 		}
 	}
 	
+	//createFaction
 	public synchronized static boolean createFaction(String name, String owner){
 		try{
 			if(!factionDataContainsFaction(name)){
@@ -152,6 +155,7 @@ public class SQL extends Main{
 		}
 	}
 	
+	//getPlayer
 	public synchronized static ArrayList<String> getPlayer(String UUID){
 		try{
 			if(playerDataContainsPlayer(UUID)){
@@ -177,12 +181,43 @@ public class SQL extends Main{
 		return null;
 	}
 	
+	//getFaction
+	public synchronized static ArrayList<String> getFaction(String name){
+		try{
+			if(factionDataContainsFaction(name)){
+				openConnection();
+				PreparedStatement sql = connection.prepareStatement("SELECT * FROM `Factions_Factions` WHERE FactionName=?;");
+				sql.setString(1, name);
+				ResultSet result = sql.executeQuery();
+				result.next();
+				ArrayList<String> finfo = new ArrayList<String>();
+				finfo.add(result.getString("FactionName"));
+				finfo.add(result.getString("FactionDescription"));
+				finfo.add(result.getString("FactionOwner"));
+				finfo.add(result.getString("FactionMembers"));
+				finfo.add(result.getString("FactionAllies"));
+				finfo.add(result.getString("FactionEnemies"));
+				finfo.add(result.getString("FactionLand"));
+				return finfo;
+			}else{
+				return null;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			closeConnection();
+		}
+		return null;
+	}
+	
+	//enemyFaction
 	public synchronized static void enemyFaction(String name1, String name2){
 		if(factionDataContainsFaction(name2)){
 			//TODO: enemy faction
 		}
 	}
 	
+	//playerJoin
 	public synchronized static void playerJoin(String UUID, String playerName){
 		if(!playerDataContainsPlayer(UUID)){
 			try{
