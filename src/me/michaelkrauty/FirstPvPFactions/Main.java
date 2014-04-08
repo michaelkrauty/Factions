@@ -36,6 +36,7 @@ public class Main extends JavaPlugin implements Listener{
 		main = this;
 		SQL.checkSqlTables();
 		saveDefaultConfig();
+		
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String args[]){
@@ -117,6 +118,10 @@ public class Main extends JavaPlugin implements Listener{
 			if(args[0].equalsIgnoreCase("power")){
 				Power.power(player, args);
 				return true;
+			}
+			
+			if(args[0].equalsIgnoreCase("test")){
+				Test.test(player, args);
 			}
 			
 			
