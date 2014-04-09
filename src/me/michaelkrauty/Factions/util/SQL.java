@@ -138,16 +138,19 @@ public class SQL extends Main{
 	public synchronized static String createFaction(String name, String ownerUUID){
 		try{
 			if(!factionDataContainsFaction(name)){
-				openConnection();
-				PreparedStatement sql = connection.prepareStatement("INSERT INTO `Factions_Factions` values(?,?,?,?,NULL,NULL,NULL,0);");
-				sql.setString(1, name);
-				sql.setString(2, "Default faction description");
-				sql.setString(3, ownerUUID);
-				sql.setString(4, ownerUUID);
-				sql.executeUpdate();
-				sql.close();
-				closeConnection();
-				return "SUCCESS";
+				if(getPlayer(ownerUUID).get(2) == null){
+					openConnection();
+					PreparedStatement sql = connection.prepareStatement("INSERT INTO `Factions_Factions` values(?,?,?,?,NULL,NULL,NULL,0);");
+					sql.setString(1, name);
+					sql.setString(2, "Default faction description");
+					sql.setString(3, ownerUUID);
+					sql.setString(4, ownerUUID);
+					sql.executeUpdate();
+					sql.close();
+					closeConnection();
+					return "SUCCESS";
+				}
+				return "ERROR:PLAYER_IS_ALREADY_IN_FACTION";
 			}
 			return "ERROR:FACTION_ALREADY_EXISTS";
 		}catch(Exception e){

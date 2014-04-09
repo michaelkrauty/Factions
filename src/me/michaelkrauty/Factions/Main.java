@@ -1,9 +1,9 @@
 package me.michaelkrauty.Factions;
 
-import java.util.UUID;
 import java.util.logging.Logger;
 
 import me.michaelkrauty.Factions.commands.*;
+import me.michaelkrauty.Factions.listeners.*;
 import me.michaelkrauty.Factions.util.*;
 
 import org.bukkit.ChatColor;
@@ -14,14 +14,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin implements Listener{
-
+	
 	public static Main main;
+	public static Plugin plugin;
 	
 	public String db_host = getConfig().getString("database.host");
 	public String db_port = getConfig().getString("database.port");
@@ -32,11 +31,12 @@ public class Main extends JavaPlugin implements Listener{
 	public static Logger log = Logger.getLogger("MC");
 	
 	public void onEnable(){
-		getServer().getPluginManager().registerEvents(this, this);
+		getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
+		getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
+		getServer().getPluginManager().registerEvents(new PlayerMove(), this);
 		main = this;
 		SQL.checkSqlTables();
 		saveDefaultConfig();
-		
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String args[]){
@@ -123,25 +123,6 @@ public class Main extends JavaPlugin implements Listener{
 			return true;
 		}
 		return true;
-	}
-	
-	@EventHandler
-	public void onPlayerJoin(PlayerJoinEvent event){
-		Player player = event.getPlayer();
-		String playerName = player.getName();
-		UUID uuid = player.getUniqueId();
-		String UUID = uuid.toString();
-		SQL.playerJoin(UUID, playerName);
-	}
-	
-	@EventHandler
-	public void onPlayerMove(PlayerMoveEvent event){
-		//check if player is on faction land
-	}
-	
-	@EventHandler
-	public void onPlayerInteract(PlayerInteractEvent event){
-		//check if player is interacting with faction land
 	}
 	
 	@EventHandler

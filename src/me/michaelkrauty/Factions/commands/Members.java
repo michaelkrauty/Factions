@@ -32,7 +32,7 @@ public class Members extends Main{
 				String out = "Members: ";
 				for(int i = 0; i < members.length; i++){
 					if(i == 0){
-						out = out + main.getServer().getPlayer(UUID.fromString(members[i])).getName();
+						out = out + plugin.getServer().getPlayer(UUID.fromString(members[i])).getName();
 					}else{
 						out = out + ", " + SQL.getPlayer(members[i]).get(1);
 					}
