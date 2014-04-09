@@ -17,6 +17,7 @@ public class Faction{
 	private static String enemies;
 	private static String land;
 	private static int power;
+	private static boolean exists;
 
 	public Faction(String name){
 		ArrayList<String> result = SQL.getFaction(name);
@@ -30,9 +31,17 @@ public class Faction{
 			this.land = result.get(6);
 			String powerStr = result.get(7);
 			this.power = Integer.parseInt(powerStr);
+			this.exists = true;
+			if(this.name == null){
+				this.exists = false;
+			}
 		}catch(Exception e){
 			
 		}
+	}
+	
+	public boolean exists(){
+		return this.exists;
 	}
 	
 	//get
@@ -65,47 +74,47 @@ public class Faction{
 	}
 	
 	//set
-	public String setName(){
-		return "";
+	public boolean setName(){
+		return false;
 	}
-	public String setDesc(){
-		return "";
+	public boolean setDesc(){
+		return false;
 	}
-	public String setOwner(){
-		return "";
+	public boolean setOwner(){
+		return false;
 	}
 	
 	//add
-	public String addMember(){
-		return "";
+	public boolean addMember(){
+		return false;
 	}
-	public String addAlly(){
-		return "";
+	public boolean addAlly(){
+		return false;
 	}
-	public String addEnemy(){
-		return "";
+	public boolean addEnemy(){
+		return false;
 	}
-	public String addLand(){
-		return "";
+	public boolean addLand(){
+		return false;
 	}
-	public String addPower(){
-		return "";
+	public boolean addPower(){
+		return false;
 	}
 	
 	//remove
-	public String removeMember(){
-		return "";
+	public boolean removeMember(){
+		return false;
 	}
-	public String removeAlly(){
-		return "";
+	public boolean removeAlly(){
+		return false;
 	}
-	public String removeEnemy(){
-		return "";
+	public boolean removeEnemy(){
+		return false;
 	}
-	public String removeLand(){
-		return "";
+	public boolean removeLand(){
+		return false;
 	}
-	public String removePower(){
-		return "";
+	public boolean removePower(){
+		return false;
 	}
 }

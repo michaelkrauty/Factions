@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.logging.Level;
 
 import me.michaelkrauty.Factions.Main;
@@ -213,37 +212,6 @@ public class SQL extends Main{
 		}
 	}
 	
-	//getFactionMembers
-	public synchronized static ArrayList<String> getFactionMembers(String name){
-		try{
-			if(factionDataContainsFaction(name)){
-				openConnection();
-				PreparedStatement sql = connection.prepareStatement("SELECT FactionMembers FROM `Factions_Factions` WHERE FactionName=?;");
-				sql.setString(1, name);
-				ResultSet result = sql.executeQuery();
-				result.next();
-				ArrayList<String> finfo = new ArrayList<String>(Arrays.asList(result.getString("FactionMembers").split(",")));
-				return finfo;
-			}else{
-				return null;
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-			return null;
-		}finally{
-			closeConnection();
-		}
-	}
-	
-	//getFactionAllies
-	
-	
-	//getFactionEnemies
-	
-	
-	//getFactionLand
-	
-	
 	//addPlayerToFaction
 	public synchronized static String addPlayerToFaction(String playerUUID, String factionName){
 		try{
@@ -286,7 +254,32 @@ public class SQL extends Main{
 	
 	
 	//removePlayerFromFaction
-	
+	public synchronized static String removePlayerFromFaction(String playerUUID, String factionName){
+		try{
+			if(factionDataContainsFaction(factionName)){
+				String temp = getPlayer(playerUUID).get(2);
+				if(temp.equals(factionName)){
+					temp = "";
+					openConnection();
+					PreparedStatement sql = connection.prepareStatement("UPDATE `Factions_Players` SET PlayerFaction=? WHERE PlayerUUID=?;");
+					sql.setString(1, temp);
+					sql.setString(2, factionName);
+					sql.executeUpdate();
+					sql.close();
+					PreparedStatement sql1 = connection.prepareStatement("UPDATE `Factions_Factions` SET FactionMembers=? WHERE FactionName=?;");
+					sql1.setString(2, factionName);
+					sql.executeUpdate();
+					sql.close();
+					return "SUCCESS";
+				}
+				return "ERROR:PLAYER_IS_NOT_IN_FACTION";
+			}
+			return "ERROR:FACTION_DOES_NOT_EXIST";
+		}catch(Exception e){
+			e.printStackTrace();
+			return "ERROR:SQL";
+		}
+	}
 	
 	//enemyFaction
 	public synchronized static void enemyFaction(String name1, String name2){

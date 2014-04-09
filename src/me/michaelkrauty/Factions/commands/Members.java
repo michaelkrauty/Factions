@@ -28,13 +28,13 @@ public class Members extends Main{
 				Object[] test03 = test02.toArray();
 				*/
 				
-				ArrayList<String> members = SQL.getFactionMembers(args[1]);
+				String[] members = faction.get(3).split(",");
 				String out = "Members: ";
-				for(int i = 0; i < members.size(); i++){
+				for(int i = 0; i < members.length; i++){
 					if(i == 0){
-						out = out + main.getServer().getPlayer(UUID.fromString(members.get(i))).getName();
+						out = out + main.getServer().getPlayer(UUID.fromString(members[i])).getName();
 					}else{
-						out = out + ", " + main.getServer().getPlayer(UUID.fromString(members.get(i))).getName();
+						out = out + ", " + SQL.getPlayer(members[i]).get(1);
 					}
 				}
 				player.sendMessage(out);

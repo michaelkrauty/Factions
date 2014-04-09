@@ -17,14 +17,11 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin implements Listener{
 
 	public static Main main;
-	
-	public static Plugin plugin;
 	
 	public String db_host = getConfig().getString("database.host");
 	public String db_port = getConfig().getString("database.port");
@@ -43,7 +40,7 @@ public class Main extends JavaPlugin implements Listener{
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String args[]){
-		if(commandLabel.equalsIgnoreCase("f") || commandLabel.equalsIgnoreCase("factions")){
+		if(commandLabel.equalsIgnoreCase("f") || commandLabel.equalsIgnoreCase("faction") || commandLabel.equalsIgnoreCase("factions")){
 			//verify sender is a player
 			if(!(sender instanceof Player)){
 				log.info("You're a console. Bad console.");
@@ -53,19 +50,12 @@ public class Main extends JavaPlugin implements Listener{
 			//player stuff
 			Player player = (Player) sender;
 			
-			/* unused
-			 * String playerName = player.getName();
-			 * String playerUUID = player.getUniqueId().toString();
-			*/
-			
 			
 			//no args
 			if(args.length == 0){
 				sender.sendMessage(ChatColor.GRAY + "Unknown command! Use /f help for help.");
 				return true;
 			}
-			
-			
 			
 			
 			//commands
