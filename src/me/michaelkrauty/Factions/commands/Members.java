@@ -1,19 +1,21 @@
 package me.michaelkrauty.Factions.commands;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
+import me.michaelkrauty.Factions.Faction;
 import me.michaelkrauty.Factions.Main;
 import me.michaelkrauty.Factions.util.SQL;
 
 import org.bukkit.entity.Player;
 
 public class Members extends Main{
+	
 	public static void members(Player player, String[] args) {
 		if(args.length == 2){
-			ArrayList<String> faction = SQL.getFaction(args[1]);
-			if(faction != null){
+			Faction faction = new Faction(args[1]);
+			if(faction.exists()){
 				
-				String[] members = faction.get(3).split(",");
+				String[] members = faction.getMembers().split(",");
 				String out = "Members: ";
 				for(int i = 0; i < members.length; i++){
 					if(i == 0){
@@ -28,10 +30,10 @@ public class Members extends Main{
 				player.sendMessage("The faction " + args[1] + " doesn't exist!");
 			}
 		}else{
-			ArrayList<String> faction = SQL.getFaction(SQL.getPlayer(player.getUniqueId().toString()).get(2));
-			if(faction != null){
+			Faction faction = new Faction(SQL.getPlayer(player.getUniqueId().toString()).get(2));
+			if(faction.exists()){
 				
-				String[] members = faction.get(3).split(",");
+				String[] members = faction.getMembers().split(",");
 				String out = "Members: ";
 				for(int i = 0; i < members.length; i++){
 					if(i == 0){
