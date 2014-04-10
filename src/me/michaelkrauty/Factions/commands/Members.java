@@ -8,10 +8,9 @@ import org.bukkit.entity.Player;
 
 public class Members extends Main{
 	
-	@SuppressWarnings("deprecation")
 	public static void members(Player player, String[] args){
 		if(args.length == 2){
-			if(main.getServer().getPlayer(args[1]) instanceof Player){
+			if(SQL.getAllPlayers().contains(args[1])){
 				Faction faction = new Faction(SQL.getPlayer(player.getUniqueId().toString()).get(2));
 				if(faction.exists()){
 					player.sendMessage(player.getName() + " is part of the faction " + faction.getName());

@@ -18,14 +18,18 @@ public class Faction{
 	public Faction(String name){
 		try{
 			ArrayList<String> result = SQL.getFaction(name);
-			this.name = result.get(0);
-			this.description = result.get(1);
-			this.members = result.get(2).split(",");
-			this.allies = result.get(3).split(",");
-			this.enemies = result.get(4).split(",");
-			this.land = result.get(5);
-			this.power = 0; //TODO
-			this.exists = true;
+			if(result != null){
+				this.name = result.get(0);
+				this.description = result.get(1);
+				this.members = result.get(2).split(",");
+				this.allies = result.get(3).split(",");
+				this.enemies = result.get(4).split(",");
+				this.land = result.get(5);
+				this.power = 0; //TODO
+				this.exists = true;
+			}else{
+				this.exists = false;
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 			this.exists = false;

@@ -252,7 +252,7 @@ public class SQL extends Main{
 			int items = result.getRow();
 			result.first();
 			ArrayList<String> players = new ArrayList<String>();
-			for(int i = 0; i < items; i++){
+			for(int i = 1; i < items; i++){
 				players.add(result.getString(i));
 				result.next();
 			}
@@ -310,7 +310,6 @@ public class SQL extends Main{
 		}
 	}
 	
-	
 	//removePlayerFromFaction
 	public synchronized static String removePlayerFromFaction(String playerUUID, String factionName){
 		try{
@@ -353,7 +352,7 @@ public class SQL extends Main{
 		if(!playerDataContainsPlayer(UUID)){
 			try{
 			openConnection();
-			PreparedStatement sql = connection.prepareStatement("INSERT INTO `Factions_Players` values(?,?,NULL,0);");
+			PreparedStatement sql = connection.prepareStatement("INSERT INTO `Factions_Players` values(?,?,'',0);");
 			sql.setString(1, UUID);
 			sql.setString(2, playerName);
 			sql.execute();
