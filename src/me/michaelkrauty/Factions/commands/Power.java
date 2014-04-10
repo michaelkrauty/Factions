@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.bukkit.entity.Player;
 
 import me.michaelkrauty.Factions.Main;
-import me.michaelkrauty.Factions.util.Functions;
 import me.michaelkrauty.Factions.util.SQL;
 
 public class Power extends Main{
@@ -19,7 +18,7 @@ public class Power extends Main{
 				player.sendMessage("The faction " + args[1] + " doesn't exist!");
 			}
 		}else{
-			player.sendMessage("You have " + Functions.getPlayerPower(player.getUniqueId().toString()) + " power.");
+			player.sendMessage("You have " + SQL.getPlayer(player.getUniqueId().toString()).get(3) + " power.");
 		}
 	}
 }
