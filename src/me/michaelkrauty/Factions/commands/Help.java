@@ -8,8 +8,7 @@ import org.bukkit.entity.Player;
 
 public class Help extends Main{
 	public static void help(Player player, String args[]){
-		if(args.length == 2){
-			if(args[1].equalsIgnoreCase("1")){
+			if(args.length != 2 || args[1].equalsIgnoreCase("1")){
 				player.sendMessage(Format.doIt("&7/--------------------&aFactions Help&7--------------------\\"));
 				player.sendMessage(Format.doIt("&a/f help &8| &bShow this help menu"));
 				player.sendMessage(Format.doIt("&a/f create <name> &8| &bCreate the faction <name>"));
@@ -30,9 +29,5 @@ public class Help extends Main{
 			}
 			player.sendMessage(ChatColor.GRAY + "Couldn't find that help page!");
 			return;
-		}else{
-			player.sendMessage("page1");
-			return;
-		}
 	}
 }
