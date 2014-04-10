@@ -13,5 +13,6 @@ public class Power extends Main{
 		}else{
 			player.sendMessage("You have " + SQL.getPlayer(player.getUniqueId().toString()).get(3) + " power.");
 		}
+		//TODO: get combined power of all faction [player's faction]'s members
 	}
 }
