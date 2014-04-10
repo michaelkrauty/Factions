@@ -15,7 +15,7 @@ public class Members extends Main{
 			Faction faction = new Faction(args[1]);
 			if(faction.exists()){
 				
-				String[] members = faction.getMembers().split(",");
+				String[] members = faction.getMembers();
 				String out = "Members: ";
 				for(int i = 0; i < members.length; i++){
 					if(i == 0){
@@ -33,7 +33,7 @@ public class Members extends Main{
 			Faction faction = new Faction(SQL.getPlayer(player.getUniqueId().toString()).get(2));
 			if(faction.exists()){
 				
-				String[] members = faction.getMembers().split(",");
+				String[] members = faction.getMembers();
 				String out = "Members: ";
 				for(int i = 0; i < members.length; i++){
 					if(i == 0){

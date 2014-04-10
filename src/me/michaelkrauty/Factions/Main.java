@@ -55,6 +55,10 @@ public class Main extends JavaPlugin implements Listener{
 			}
 			
 			//commands
+			if(args[0].equalsIgnoreCase("allies")){
+				Allies.allies(player, args);
+				return true;
+			}
 			if(args[0].equalsIgnoreCase("ally")){
 				Ally.ally(player, args);
 				return true;
@@ -65,6 +69,14 @@ public class Main extends JavaPlugin implements Listener{
 			}
 			if(args[0].equalsIgnoreCase("create")){
 				Create.create(player, args);
+				return true;
+			}
+			if(args[0].equalsIgnoreCase("description") || args[0].equalsIgnoreCase("desc")){
+				Description.description(player, args);
+				return true;
+			}
+			if(args[0].equalsIgnoreCase("enemies")){
+				Enemies.enemies(player, args);
 				return true;
 			}
 			if(args[0].equalsIgnoreCase("enemy")){

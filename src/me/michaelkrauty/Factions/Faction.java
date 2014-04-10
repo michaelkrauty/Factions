@@ -1,40 +1,34 @@
 package me.michaelkrauty.Factions;
 
-import me.michaelkrauty.Factions.Main;
 import me.michaelkrauty.Factions.util.SQL;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class Faction{
 
 	private String name;
 	private String description;
-	private String owner;
-	private String members;
-	private String allies;
-	private String enemies;
+	private String[] members;
+	private String[] allies;
+	private String[] enemies;
 	private String land;
 	private int power;
 	private boolean exists;
 
 	public Faction(String name){
-		ArrayList<String> result = SQL.getFaction(name);
 		try{
-			this.name = result.get(1);
+			ArrayList<String> result = SQL.getFaction(name);
+			this.name = result.get(0);
 			this.description = result.get(1);
-			this.owner = result.get(2);
-			this.members = result.get(3);
-			this.allies = result.get(4);
-			this.enemies = result.get(5);
-			this.land = result.get(6);
-			this.power = Integer.parseInt(result.get(7));
+			this.members = result.get(2).split(",");
+			this.allies = result.get(3).split(",");
+			this.enemies = result.get(4).split(",");
+			this.land = result.get(5);
+			this.power = 0; //TODO
 			this.exists = true;
-			if(this.name == null){
-				this.exists = false;
-			}
 		}catch(Exception e){
-			
+			e.printStackTrace();
+			this.exists = false;
 		}
 	}
 	
@@ -50,19 +44,13 @@ public class Faction{
 	public String getDesc(){
 		return this.description;
 	}
-	public String getOwnerUUID(){
-		return this.owner;
-	}
-	public String getOwnerName(){
-		return Main.main.getServer().getPlayer(UUID.fromString(this.owner)).getName();
-	}
-	public String getMembers(){
+	public String[] getMembers(){
 		return this.members;
 	}
-	public String getAllies(){
+	public String[] getAllies(){
 		return this.allies;
 	}
-	public String getEnemies(){
+	public String[] getEnemies(){
 		return this.enemies;
 	}
 	public String getLand(){
@@ -79,13 +67,10 @@ public class Faction{
 	public boolean setDesc(){
 		return false;
 	}
-	public boolean setOwner(){
-		return false;
-	}
 	
 	//add
-	public void addMember(String playerUUID, String factionName){
-		SQL.addPlayerToFaction(playerUUID, factionName);
+	public String addMember(String playerUUID){
+		return SQL.addPlayerToFaction(playerUUID, this.name);
 	}
 	public void addAlly(){
 		

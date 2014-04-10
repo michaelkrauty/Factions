@@ -58,7 +58,7 @@ public class SQL extends Main{
 		}catch(Exception e){
 			try{
 				openConnection();
-				PreparedStatement sql = connection.prepareStatement("CREATE TABLE `Factions_Factions`(FactionName varchar(255) KEY, FactionDescription varchar(255), FactionOwner varchar(255), FactionMembers varchar(255), FactionAllies varchar(255), FactionEnemies varchar(255), FactionLand varchar(255), FactionPower varchar(255));");
+				PreparedStatement sql = connection.prepareStatement("CREATE TABLE `Factions_Factions`(FactionName varchar(255) KEY, FactionDescription varchar(255), FactionMembers varchar(255), FactionAllies varchar(255), FactionEnemies varchar(255), FactionLand varchar(255));");
 				sql.executeUpdate();
 				sql.close();
 				closeConnection();
@@ -140,13 +140,19 @@ public class SQL extends Main{
 			if(!factionDataContainsFaction(name)){
 				if(getPlayer(ownerUUID).get(2) == null){
 					openConnection();
-					PreparedStatement sql = connection.prepareStatement("INSERT INTO `Factions_Factions` values(?,?,?,?,NULL,NULL,NULL,0);");
+					PreparedStatement sql = connection.prepareStatement("INSERT INTO `Factions_Factions` values(?,?,?,'','','');");
 					sql.setString(1, name);
 					sql.setString(2, "Default faction description");
 					sql.setString(3, ownerUUID);
-					sql.setString(4, ownerUUID);
 					sql.executeUpdate();
 					sql.close();
+					closeConnection();
+					openConnection();
+					PreparedStatement sql1 = connection.prepareStatement("UPDATE `Factions_Players` SET PlayerFaction=? WHERE PlayerUUID=?;");
+					sql1.setString(1, name);
+					sql1.setString(2, ownerUUID);
+					sql1.executeUpdate();
+					sql1.close();
 					closeConnection();
 					return "SUCCESS";
 				}
@@ -197,12 +203,10 @@ public class SQL extends Main{
 				ArrayList<String> finfo = new ArrayList<String>();
 				finfo.add(result.getString("FactionName"));
 				finfo.add(result.getString("FactionDescription"));
-				finfo.add(result.getString("FactionOwner"));
 				finfo.add(result.getString("FactionMembers"));
 				finfo.add(result.getString("FactionAllies"));
 				finfo.add(result.getString("FactionEnemies"));
 				finfo.add(result.getString("FactionLand"));
-				finfo.add(result.getString("FactionPower"));
 				return finfo;
 			}else{
 				return null;
@@ -219,7 +223,7 @@ public class SQL extends Main{
 	public synchronized static ArrayList<String> getAllFactions(){
 		try{
 			openConnection();
-			PreparedStatement sql = connection.prepareStatement("SELECT `FactionName` FROM `Factions_Factions` ORDER BY `FactionPower` DESC;");
+			PreparedStatement sql = connection.prepareStatement("SELECT `FactionName` FROM `Factions_Factions`;");
 			ResultSet result = sql.executeQuery();
 			result.last();
 			int items = result.getRow();
@@ -282,25 +286,27 @@ public class SQL extends Main{
 	//removePlayerFromFaction
 	public synchronized static String removePlayerFromFaction(String playerUUID, String factionName){
 		try{
-			if(factionDataContainsFaction(factionName)){
-				String temp = getPlayer(playerUUID).get(2);
-				if(temp.equals(factionName)){
-					temp = "";
+			String temp = getPlayer(playerUUID).get(2);
+			if(temp != null && temp.equals(factionName)){
+				if(factionDataContainsFaction(factionName)){
 					openConnection();
-					PreparedStatement sql = connection.prepareStatement("UPDATE `Factions_Players` SET PlayerFaction=? WHERE PlayerUUID=?;");
-					sql.setString(1, temp);
-					sql.setString(2, factionName);
+					PreparedStatement sql = connection.prepareStatement("UPDATE `Factions_Players` SET PlayerFaction=NULL WHERE PlayerUUID=?;");
+					sql.setString(1, playerUUID);
 					sql.executeUpdate();
 					sql.close();
+					closeConnection();
+					openConnection();
 					PreparedStatement sql1 = connection.prepareStatement("UPDATE `Factions_Factions` SET FactionMembers=? WHERE FactionName=?;");
+					sql1.setString(1, getFaction(factionName).get(3).replace(playerUUID+",", "").replace(playerUUID, ""));
 					sql1.setString(2, factionName);
-					sql.executeUpdate();
-					sql.close();
+					sql1.executeUpdate();
+					sql1.close();
+					closeConnection();
 					return "SUCCESS";
 				}
-				return "ERROR:PLAYER_IS_NOT_IN_FACTION";
+				return "ERROR:FACTION_DOES_NOT_EXIST";
 			}
-			return "ERROR:FACTION_DOES_NOT_EXIST";
+			return "ERROR:PLAYER_IS_NOT_IN_FACTION";
 		}catch(Exception e){
 			e.printStackTrace();
 			return "ERROR:SQL";
