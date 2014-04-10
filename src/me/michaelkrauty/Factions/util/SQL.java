@@ -154,14 +154,14 @@ public class SQL extends Main{
 					sql1.executeUpdate();
 					sql1.close();
 					closeConnection();
-					return "SUCCESS";
+					return "Successfully created the faction " + name + "!";
 				}
-				return "ERROR:PLAYER_IS_ALREADY_IN_FACTION";
+				return "You can't create a faction if you're already in one!";
 			}
-			return "ERROR:FACTION_ALREADY_EXISTS";
+			return "The faction " + name + " already exists!";
 		}catch(Exception e){
 			e.printStackTrace();
-			return "ERROR:SQL";
+			return "Something went wrong. Please tell an admin you had an \"SQL error\" using this command.";
 		}
 	}
 	
@@ -275,13 +275,13 @@ public class SQL extends Main{
 					sql2.close();
 					return "SUCCESS";
 				}
-				return "ERROR:PLAYER_ALREADY_IN_FACTION";
+				return "You're already in that faction!";
 			}else{
-				return "ERROR:FACTION_DOES_NOT_EXIST";
+				return "The faction " + factionName + " doesn't exist!";
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			return "ERROR:SQL";
+			return "Something went wrong. Please tell an admin you had an \"SQL error\" using this command.";
 		}finally{
 			closeConnection();
 		}
@@ -309,12 +309,12 @@ public class SQL extends Main{
 					closeConnection();
 					return "SUCCESS";
 				}
-				return "ERROR:FACTION_DOES_NOT_EXIST";
+				return "The faction " + factionName + " doesn't exist!";
 			}
-			return "ERROR:PLAYER_IS_NOT_IN_FACTION";
+			return "You're not in a faction!";
 		}catch(Exception e){
 			e.printStackTrace();
-			return "ERROR:SQL";
+			return "Something went wrong. Please tell an admin you had an \"SQL error\" using this command.";
 		}
 	}
 	

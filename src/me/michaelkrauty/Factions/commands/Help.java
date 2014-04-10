@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 public class Help extends Main{
 	public static void help(Player player, String args[]){
+		//TODO: more help messages
 			if(args.length != 2 || args[1].equalsIgnoreCase("1")){
 				player.sendMessage(Format.doIt("&7/--------------------&aFactions Help&7--------------------\\"));
 				player.sendMessage(Format.doIt("&a/f create <name> &8| &bCreate the faction <name>"));

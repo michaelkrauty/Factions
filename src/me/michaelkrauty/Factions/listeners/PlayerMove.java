@@ -8,6 +8,6 @@ public class PlayerMove implements Listener{
 	
 	@EventHandler
 	public void onPlayerMove(PlayerMoveEvent event){
-		//
+		//TODO: check if player is in enemy territory and what not
 	}
 }
