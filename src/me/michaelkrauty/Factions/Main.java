@@ -98,6 +98,11 @@ public class Main extends JavaPlugin implements Listener{
 				return true;
 			}
 			
+			if(args[0].equalsIgnoreCase("list")){
+				List.list(player, args);
+				return true;
+			}
+			
 			if(args[0].equalsIgnoreCase("members")){
 				Members.members(player, args);
 				return true;

@@ -215,6 +215,29 @@ public class SQL extends Main{
 		}
 	}
 	
+	//getAllFactions
+	public synchronized static ArrayList<String> getAllFactions(){
+		try{
+			openConnection();
+			PreparedStatement sql = connection.prepareStatement("SELECT `FactionName` FROM `Factions_Factions` ORDER BY `FactionPower` DESC LIMIT 10;");
+			ResultSet result = sql.executeQuery();
+			result.last();
+			int items = result.getRow();
+			result.first();
+			ArrayList<String> names = new ArrayList<String>();
+			for(int i = 0; i < items; i++){
+				names.add(result.getString(1));
+				result.next();
+			}
+			return names;
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			closeConnection();
+		}
+		return null;
+	}
+	
 	//addPlayerToFaction
 	public synchronized static String addPlayerToFaction(String playerUUID, String factionName){
 		try{

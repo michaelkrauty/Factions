@@ -6,18 +6,17 @@ import me.michaelkrauty.Factions.util.SQL;
 import java.util.ArrayList;
 import java.util.UUID;
 
-@SuppressWarnings({"static-access"})
 public class Faction{
 
-	private static String name;
-	private static String description;
-	private static String owner;
-	private static String members;
-	private static String allies;
-	private static String enemies;
-	private static String land;
-	private static int power;
-	private static boolean exists;
+	private String name;
+	private String description;
+	private String owner;
+	private String members;
+	private String allies;
+	private String enemies;
+	private String land;
+	private int power;
+	private boolean exists;
 
 	public Faction(String name){
 		ArrayList<String> result = SQL.getFaction(name);
@@ -29,8 +28,7 @@ public class Faction{
 			this.allies = result.get(4);
 			this.enemies = result.get(5);
 			this.land = result.get(6);
-			String powerStr = result.get(7);
-			this.power = Integer.parseInt(powerStr);
+			this.power = Integer.parseInt(result.get(7));
 			this.exists = true;
 			if(this.name == null){
 				this.exists = false;
@@ -40,6 +38,7 @@ public class Faction{
 		}
 	}
 	
+	//exists?
 	public boolean exists(){
 		return this.exists;
 	}
@@ -85,36 +84,36 @@ public class Faction{
 	}
 	
 	//add
-	public boolean addMember(){
-		return false;
+	public void addMember(String playerUUID, String factionName){
+		SQL.addPlayerToFaction(playerUUID, factionName);
 	}
-	public boolean addAlly(){
-		return false;
+	public void addAlly(){
+		
 	}
-	public boolean addEnemy(){
-		return false;
+	public void addEnemy(){
+		
 	}
-	public boolean addLand(){
-		return false;
+	public void addLand(){
+		
 	}
-	public boolean addPower(){
-		return false;
+	public void addPower(){
+		
 	}
 	
 	//remove
-	public boolean removeMember(){
-		return false;
+	public void removeMember(){
+		
 	}
-	public boolean removeAlly(){
-		return false;
+	public void removeAlly(){
+		
 	}
-	public boolean removeEnemy(){
-		return false;
+	public void removeEnemy(){
+		
 	}
-	public boolean removeLand(){
-		return false;
+	public void removeLand(){
+		
 	}
-	public boolean removePower(){
-		return false;
+	public void removePower(){
+		
 	}
 }
