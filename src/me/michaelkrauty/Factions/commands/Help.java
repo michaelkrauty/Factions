@@ -27,8 +27,8 @@ public class Help extends Main{
 				player.sendMessage(Format.doIt("&a/f enemy <faction> &8| &bTag <faction> as an enemy"));
 				player.sendMessage(Format.doIt("&a/f neutral <faction> &8| &bTag <faction> as neutral"));
 				player.sendMessage(Format.doIt("&a/f kick <player> &8| &bKick <player> from your faction"));
-				player.sendMessage(Format.doIt(""));
-				player.sendMessage(Format.doIt(""));
+				player.sendMessage(Format.doIt("&a/f allies [faction] &8| &bGet the allies of a faction"));
+				player.sendMessage(Format.doIt("&a/f enemies [faction] &8| &bGet the enemies of a faction"));
 				player.sendMessage(Format.doIt(""));
 				player.sendMessage(Format.doIt(""));
 				player.sendMessage(Format.doIt(""));
