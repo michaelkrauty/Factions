@@ -5,7 +5,8 @@ import org.bukkit.entity.Player;
 public class Ally {
 
 	public static void ally(Player player, String[] args){
-		//TODO: ally
+		//TODO
+		player.sendMessage("This isn't set up yet.");
 	}
 
 }

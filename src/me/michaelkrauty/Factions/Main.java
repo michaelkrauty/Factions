@@ -63,6 +63,10 @@ public class Main extends JavaPlugin implements Listener{
 				Ally.ally(player, args);
 				return true;
 			}
+			if(args[0].equalsIgnoreCase("claim")){
+				Claim.claim(player, args);
+				return true;
+			}
 			if(args[0].equalsIgnoreCase("create")){
 				Create.create(player, args);
 				return true;
@@ -103,7 +107,7 @@ public class Main extends JavaPlugin implements Listener{
 				return true;
 			}
 			
-			if(args[0].equalsIgnoreCase("members")){
+			if(args[0].equalsIgnoreCase("members") || args[0].equalsIgnoreCase("who")){
 				Members.members(player, args);
 				return true;
 			}
@@ -115,6 +119,11 @@ public class Main extends JavaPlugin implements Listener{
 			
 			if(args[0].equalsIgnoreCase("power")){
 				Power.power(player, args);
+				return true;
+			}
+			
+			if(args[0].equalsIgnoreCase("unclaim")){
+				Unclaim.unclaim(player, args);
 				return true;
 			}
 			
