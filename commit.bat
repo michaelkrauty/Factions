@@ -13,6 +13,7 @@ move Factions.jar ../target
 cd me\michaelkrauty\Factions
 del *.class
 del commands\*.class
+del listeners\*.class
 del util\*.class
 cd ../../../../
 git add --all
