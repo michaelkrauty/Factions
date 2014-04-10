@@ -33,7 +33,7 @@ public class Allies {
 		}else{
 			Faction faction = new Faction(SQL.getPlayer(player.getUniqueId().toString()).get(2));
 			if(faction.exists()){
-				String[] allies = faction.getEnemies();
+				String[] allies = faction.getAllies();
 				String out = "Allies: ";
 				String temp = SQL.getFaction(SQL.getPlayer(player.getUniqueId().toString()).get(2)).get(3);
 				if(!temp.equals("")){
