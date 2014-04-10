@@ -255,8 +255,13 @@ public class SQL extends Main{
 				sql.close();
 				closeConnection();
 				if(!members.contains(playerUUID)){
-					//if player is invited {here}
-					String newstring = members + "," + playerUUID;
+					//TODO: if player is invited
+					String newstring = null;
+					if(members.equals("")){
+						newstring = playerUUID;
+					}else{
+						newstring = members + "," + playerUUID;
+					}
 					openConnection();
 					PreparedStatement sql2 = connection.prepareStatement("UPDATE `Factions_Factions` SET FactionMembers=? WHERE FactionName=?;");
 					sql2.setString(1, newstring);

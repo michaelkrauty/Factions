@@ -17,12 +17,17 @@ public class Members extends Main{
 				
 				String[] members = faction.getMembers();
 				String out = "Members: ";
-				for(int i = 0; i < members.length; i++){
-					if(i == 0){
-						out = out + SQL.getPlayer(members[i]).get(1);
-					}else{
-						out = out + ", " + SQL.getPlayer(members[i]).get(1);
+				String temp = SQL.getFaction(args[1]).get(2);
+				if(!temp.equals("")){
+					for(int i = 0; i < members.length; i++){
+						if(i == 0){
+							out = out + SQL.getPlayer(members[i]).get(1);
+						}else{
+							out = out + ", " + SQL.getPlayer(members[i]).get(1);
+						}
 					}
+				}else{
+					out = out + "None.";
 				}
 				player.sendMessage(out);
 				

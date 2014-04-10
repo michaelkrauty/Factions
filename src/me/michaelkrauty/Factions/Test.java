@@ -1,7 +1,5 @@
 package me.michaelkrauty.Factions;
 
-import java.util.UUID;
-
 import me.michaelkrauty.Factions.util.SQL;
 
 import org.bukkit.entity.Player;
@@ -20,12 +18,14 @@ public class Test extends Main{
 				String memberString = "";
 				String allyString = "";
 				String enemyString = "";
-				for(int i = 0; i < members.length; i++){
-					String p = SQL.getPlayer(members[i]).get(1);
-					if(i == 0){
-						memberString = p;
-					}else{
-						memberString = memberString + ", " + p;
+				if(members.length != 0 && !members[0].equals("")){
+					for(int i = 0; i < members.length; i++){
+						String p = SQL.getPlayer(members[i]).get(1);
+						if(i == 0){
+							memberString = p;
+						}else{
+							memberString = memberString + ", " + p;
+						}
 					}
 				}
 				for(int i = 0; i < allies.length; i++){

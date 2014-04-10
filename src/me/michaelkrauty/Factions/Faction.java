@@ -72,6 +72,8 @@ public class Faction{
 	public String addMember(String playerUUID){
 		return SQL.addPlayerToFaction(playerUUID, this.name);
 	}
+	
+	//TODO: here down
 	public void addAlly(){
 		
 	}
