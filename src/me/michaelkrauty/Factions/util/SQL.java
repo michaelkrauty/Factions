@@ -219,7 +219,7 @@ public class SQL extends Main{
 	public synchronized static ArrayList<String> getAllFactions(){
 		try{
 			openConnection();
-			PreparedStatement sql = connection.prepareStatement("SELECT `FactionName` FROM `Factions_Factions` ORDER BY `FactionPower` DESC LIMIT 10;");
+			PreparedStatement sql = connection.prepareStatement("SELECT `FactionName` FROM `Factions_Factions` ORDER BY `FactionPower` DESC;");
 			ResultSet result = sql.executeQuery();
 			result.last();
 			int items = result.getRow();
