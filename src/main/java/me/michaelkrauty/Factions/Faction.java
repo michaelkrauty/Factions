@@ -4,7 +4,7 @@ import me.michaelkrauty.Factions.util.SQL;
 
 import java.util.ArrayList;
 
-public class Faction{
+public class Faction {
 
 	private String name;
 	private String description;
@@ -15,10 +15,10 @@ public class Faction{
 	private int power;
 	private boolean exists;
 
-	public Faction(String name){
-		try{
+	public Faction(String name) {
+		try {
 			ArrayList<String> result = SQL.getFaction(name);
-			if(result != null){
+			if (result != null) {
 				this.name = result.get(0);
 				this.description = result.get(1);
 				this.members = result.get(2).split(",");
@@ -27,85 +27,99 @@ public class Faction{
 				this.land = result.get(5);
 				this.power = 0; //TODO
 				this.exists = true;
-			}else{
+			} else {
 				this.exists = false;
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			this.exists = false;
 		}
 	}
-	
+
 	//exists?
-	public boolean exists(){
+	public boolean exists() {
 		return this.exists;
 	}
-	
+
 	//get
-	public String getName(){
+	public String getName() {
 		return this.name;
 	}
-	public String getDesc(){
+
+	public String getDesc() {
 		return this.description;
 	}
-	public String[] getMembers(){
+
+	public String[] getMembers() {
 		return this.members;
 	}
-	public String[] getAllies(){
+
+	public String[] getAllies() {
 		return this.allies;
 	}
-	public String[] getEnemies(){
+
+	public String[] getEnemies() {
 		return this.enemies;
 	}
-	public String getLand(){
+
+	public String getLand() {
 		return this.land;
 	}
-	public int getPower(){
+
+	public int getPower() {
 		return this.power;
 	}
-	
+
 	//set
-	public boolean setName(){
+	public boolean setName() {
 		// TODO: set name
 		return false;
 	}
-	public boolean setDesc(){
+
+	public boolean setDesc() {
 		// TODO: set desc
 		return false;
 	}
-	
+
 	//add
-	public String addMember(String playerUUID){
+	public String addMember(String playerUUID) {
 		return SQL.addPlayerToFaction(playerUUID, this.name);
 	}
 
-	public void addAlly(){
+	public void addAlly() {
 		// TODO: add ally
 	}
-	public void addEnemy(){
+
+	public void addEnemy() {
 		// TODO: add enemy
 	}
-	public void addLand(){
+
+	public void addLand() {
 		// TODO: add land
 	}
-	public void addPower(){
+
+	public void addPower() {
 		// TODO: add power
 	}
-	
+
 	//remove
-	public void removeMember(){
+	public void removeMember() {
 		// TODO: remove power
 	}
-	public void removeAlly(){
+
+	public void removeAlly() {
 		// TODO: remove ally
 	}
-	public void removeEnemy(){
+
+	public void removeEnemy() {
 		// TODO: remove enemy
 	}
-	public void removeLand(){
+
+	public void removeLand() {
 		// TODO: remove land
 	}
-	public void removePower(){
+
+	public void removePower() {
 		// TODO: remove power
 	}
 }

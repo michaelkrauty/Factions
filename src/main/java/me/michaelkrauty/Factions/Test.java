@@ -4,12 +4,12 @@ import me.michaelkrauty.Factions.util.SQL;
 
 import org.bukkit.entity.Player;
 
-public class Test extends Main{
-	
-	public static void test(Player player, String[] args){
-		if(args.length == 2){
+public class Test extends Main {
+
+	public static void test(Player player, String[] args) {
+		if (args.length == 2) {
 			Faction faction = new Faction(args[1]);
-			if(faction.exists()){
+			if (faction.exists()) {
 				player.sendMessage("Name: " + faction.getName());
 				player.sendMessage("Desc: " + faction.getDesc());
 				String[] members = faction.getMembers();
@@ -18,27 +18,27 @@ public class Test extends Main{
 				String memberString = "";
 				String allyString = "";
 				String enemyString = "";
-				if(members.length != 0 && !members[0].equals("")){
-					for(int i = 0; i < members.length; i++){
+				if (members.length != 0 && !members[0].equals("")) {
+					for (int i = 0; i < members.length; i++) {
 						String p = SQL.getPlayer(members[i]).get(1);
-						if(i == 0){
+						if (i == 0) {
 							memberString = p;
-						}else{
+						} else {
 							memberString = memberString + ", " + p;
 						}
 					}
 				}
-				for(int i = 0; i < allies.length; i++){
-					if(i == 0){
+				for (int i = 0; i < allies.length; i++) {
+					if (i == 0) {
 						allyString = allies[i];
-					}else{
+					} else {
 						allyString = allyString + ", " + allies[i];
 					}
 				}
-				for(int i = 0; i < enemies.length; i++){
-					if(i == 0){
+				for (int i = 0; i < enemies.length; i++) {
+					if (i == 0) {
 						enemyString = enemies[i];
-					}else{
+					} else {
 						enemyString = enemyString + ", " + enemies[i];
 					}
 				}
@@ -46,10 +46,10 @@ public class Test extends Main{
 				player.sendMessage("Allies: " + allyString);
 				player.sendMessage("Enemies: " + enemyString);
 				player.sendMessage("Power: " + Integer.toString(faction.getPower()));
-			}else{
+			} else {
 				player.sendMessage("nope");
 			}
-		}else{
+		} else {
 			player.sendMessage("nope2");
 		}
 	}

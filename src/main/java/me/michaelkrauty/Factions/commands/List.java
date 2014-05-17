@@ -8,13 +8,13 @@ import org.bukkit.entity.Player;
 
 public class List {
 
-	public static void list(Player player, String[] args){
+	public static void list(Player player, String[] args) {
 		String out = null;
 		ArrayList<String> names = SQL.getAllFactions();
-		for(int i = 0; i < names.size(); i++){
-			if(i == 0){
+		for (int i = 0; i < names.size(); i++) {
+			if (i == 0) {
 				out = "Factions: " + names.get(i);
-			}else{
+			} else {
 				out = out + ", " + names.get(i);
 			}
 		}

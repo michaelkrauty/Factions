@@ -5,17 +5,17 @@ import org.bukkit.entity.Player;
 import me.michaelkrauty.Factions.Main;
 import me.michaelkrauty.Factions.util.SQL;
 
-public class Create extends Main{
-	
-	public static void create(Player player, String args[]){
-		if(args.length < 2){
+public class Create extends Main {
+
+	public static void create(Player player, String args[]) {
+		if (args.length < 2) {
 			player.sendMessage("Incorrect Usage!");
 			return;
 		}
 		String result = SQL.createFaction(args[1], player.getUniqueId().toString());
-		if(result.equals("SUCCESS")){
+		if (result.equals("SUCCESS")) {
 			player.sendMessage("Faction created!");
-		}else{
+		} else {
 			player.sendMessage(result);
 		}
 	}
