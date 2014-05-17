@@ -138,7 +138,7 @@ public class SQL extends Main{
 	public synchronized static String createFaction(String name, String ownerUUID){
 		try{
 			if(!factionDataContainsFaction(name)){
-				if(getPlayer(ownerUUID).get(2) == null){
+				if(getPlayer(ownerUUID).get(2) == null || getPlayer(ownerUUID).get(2).equals("")){
 					openConnection();
 					PreparedStatement sql = connection.prepareStatement("INSERT INTO `Factions_Factions` values(?,?,?,'','','');");
 					sql.setString(1, name);
