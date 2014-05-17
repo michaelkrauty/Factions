@@ -66,9 +66,11 @@ public class Faction{
 	
 	//set
 	public boolean setName(){
+		// TODO: set name
 		return false;
 	}
 	public boolean setDesc(){
+		// TODO: set desc
 		return false;
 	}
 	
@@ -76,35 +78,34 @@ public class Faction{
 	public String addMember(String playerUUID){
 		return SQL.addPlayerToFaction(playerUUID, this.name);
 	}
-	
-	//TODO: here down
+
 	public void addAlly(){
-		
+		// TODO: add ally
 	}
 	public void addEnemy(){
-		
+		// TODO: add enemy
 	}
 	public void addLand(){
-		
+		// TODO: add land
 	}
 	public void addPower(){
-		
+		// TODO: add power
 	}
 	
 	//remove
 	public void removeMember(){
-		
+		// TODO: remove power
 	}
 	public void removeAlly(){
-		
+		// TODO: remove ally
 	}
 	public void removeEnemy(){
-		
+		// TODO: remove enemy
 	}
 	public void removeLand(){
-		
+		// TODO: remove land
 	}
 	public void removePower(){
-		
+		// TODO: remove power
 	}
 }

@@ -22,8 +22,8 @@ public class Members extends Main{
 			}else{
 */				
 				ArrayList<String> players = SQL.getAllPlayers();
-				for(int i = 0; i < players.size(); i++){
-					player.sendMessage(players.get(i));
+				for (String player1 : players) {
+					player.sendMessage(player1);
 				}
 				Faction faction = new Faction(args[1]);
 				if(faction.exists()){

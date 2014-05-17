@@ -20,7 +20,6 @@ public class Help extends Main{
 				player.sendMessage(Format.doIt("└&bor see what faction <player> is in"));
 				player.sendMessage(Format.doIt("&a/f list &8| &bList all factions, order by most power"));
 				player.sendMessage(Format.doIt("&2View the next page with &a/f help 2"));
-				return;
 			}
 			if(args[1].equalsIgnoreCase("2")){
 				player.sendMessage(Format.doIt("&a/f ally <faction> &8| &bTag <faction> as an ally"));
@@ -49,6 +48,5 @@ public class Help extends Main{
 				return;
 			}
 			player.sendMessage(ChatColor.GRAY + "Couldn't find that help page!");
-			return;
 	}
 }

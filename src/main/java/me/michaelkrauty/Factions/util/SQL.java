@@ -45,7 +45,7 @@ public class SQL extends Main{
 				sql.executeUpdate();
 				sql.close();
 				closeConnection();
-			}catch(Exception e1){}
+			}catch(Exception ignored){}
 		}
 		try{
 			openConnection();
@@ -62,7 +62,7 @@ public class SQL extends Main{
 				sql.executeUpdate();
 				sql.close();
 				closeConnection();
-			}catch(Exception e1){}
+			}catch(Exception ignored){}
 		}
 	}
 	
